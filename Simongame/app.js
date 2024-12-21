@@ -60,13 +60,6 @@ function flashSequence()
     },1000);
 }
 
-function enablePlayerInput(){
-    isPlayerInputEnabled = true;
-    colors.forEach((button,index)=>{
-        button.addEventListener("click",()=>{
-            handlePlayerInput(index+1)});
-        })
-}
 
   function handlePlayerInput(colorIndex)
 {
@@ -87,14 +80,24 @@ function enablePlayerInput(){
         },2000);
     }
 }
- function disablePlayerInput() {
-        // isPlayerInputEnabled = false;
-        colors.forEach(button => {
-          button.onclick = null;
-        });
+function enablePlayerInput() {
+    colors.forEach((button) => {
+        button.addEventListener("click", handleButtonClick);
+    });
 }
+function disablePlayerInput() {
+    colors.forEach((button) => {
+        button.removeEventListener("click", handleButtonClick);
+    });
+}
+function handleButtonClick(event) {
+    const button = event.target;
+    const colorIndex = colors.indexOf(button) + 1;
+    handlePlayerInput(colorIndex);
+}
+
 function gameOver() {
-    sscoreDisplay.textContent = `Game Over! Final Score: ${level}`;
+    scoreDisplay.textContent = `Game Over! Final Score: ${level-1}`;
     on = true;
     win = false;
     disablePlayerInput();
