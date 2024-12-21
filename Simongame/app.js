@@ -91,7 +91,10 @@ function disablePlayerInput() {
     });
 }
 function handleButtonClick(event) {
+    console.log(event);
     const button = event.target;
+    // console.log(button);
+    // console.log(colors.indexOf(button));
     const colorIndex = colors.indexOf(button) + 1;
     handlePlayerInput(colorIndex);
 }
